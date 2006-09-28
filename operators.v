@@ -21,10 +21,9 @@ Require Export vectors.
 Module Type TVectors.
 Parameter A : Set.
 Parameter Aopp : A -> A.
-Parameters (Aplus : A -> A -> A) (Amult : A -> A -> A).
+Parameters (Aplus Aminus Amult: A -> A -> A).
 Parameters (A0 : A) (A1 : A).
-Parameter Aeq : A -> A -> bool.
-Parameter A_ring : Ring_Theory Aplus Amult A1 A0 Aopp Aeq.
+Parameter A_ring : ring_theory A0 A1 Aplus Amult Aminus Aopp (eq(A:=A)).
 
 Parameter mkvect : forall (x : A) (n : nat), vect A n.
 Parameter addvect : forall n : nat, vect A n -> vect A n -> vect A n.
@@ -102,20 +101,22 @@ Axiom
 End TVectors.
 
 Module Vectors (C: Carrier) <: TVectors with Definition A := C.A with
-  Definition Aopp := C.Aopp with Definition Aplus := C.Aplus with Definition
-  Amult := C.Amult with Definition A0 := C.A0 with Definition A1 := C.A1 with
-  Definition Aeq := C.Aeq with Definition A_ring := C.A_ring.
+  Definition Aopp := C.Aopp with Definition Aplus := C.Aplus with
+  Definition Amult := C.Amult with Definition Aminus := C.Aminus with
+  Definition A0 := C.A0 with Definition A1 := C.A1 with
+  Definition A_ring := C.A_ring.
 
 Definition A := C.A.
 Definition Aopp := C.Aopp.
 Definition Aplus := C.Aplus.
 Definition Amult := C.Amult.
+Definition Aminus := C.Aminus.
 Definition A0 := C.A0.
 Definition A1 := C.A1.
-Definition Aeq := C.Aeq.
 Definition A_ring := C.A_ring.
 
-Import C. (*Add  Abstract Ring A Aplus Amult A1 A0 Aopp Aeq A_ring.*)
+Import C.
+Add Ring Ar : A_ring.
 
 (* functions *)
 
