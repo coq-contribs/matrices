@@ -22,3 +22,4 @@ the use of preconditions (to check whether we are within the
 bounds of the matrix). 
 
 Keywords: matrices, vectors, linear algebra, Coq modules
+Category: Mathematics/Algebra
