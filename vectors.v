@@ -13,6 +13,7 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
+Global Set Asymmetric Patterns.
 
 Require Export Eqdep.
 (* The lemma uniq is taken from Bruno Barras , see coq-club msg # Fri, 17 May 2002 17:17:49 +0200 
