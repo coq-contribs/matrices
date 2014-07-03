@@ -13,8 +13,6 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-Global Set Asymmetric Patterns.
-
 Require Export Eqdep.
 (* The lemma uniq is taken from Bruno Barras , see coq-club msg # Fri, 17 May 2002 17:17:49 +0200 
    It does not require any axiom because equality over nat is decidable *)
@@ -450,8 +448,8 @@ End vect_def.
 Fixpoint map (A B : Set) (f : A -> B) (n : nat) (v : vect A n) {struct v} :
  vect B n :=
   match v in (vect _ p) return (vect B p) with
-  | vnil => vnil B
-  | vcons p x v' => vcons B p (f x) (map A B f p v')
+  | vnil _ => vnil B
+  | vcons _ p x v' => vcons B p (f x) (map A B f p v')
   end.
  
 Lemma map_2 :

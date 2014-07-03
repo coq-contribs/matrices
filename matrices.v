@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export operators.
+Require Export Matrices.operators.
 
 Module Type TMatrices.
 
@@ -105,12 +105,12 @@ Definition eq_add_S_tr (n m : nat) (H : S n = S m) : n = m := f_equal pred H.
 Fixpoint addmatrix (n m : nat) (v : Lmatrix n m) {struct v} :
  Lmatrix n m -> Lmatrix n m :=
   match v in (vect _ k) return (Lmatrix n k -> Lmatrix n k) with
-  | vnil => fun v' => vnil (vect A n)
-  | vcons m1 x1 v1 =>
+  | vnil _ => fun v' => vnil (vect A n)
+  | vcons _ m1 x1 v1 =>
       fun v' : Lmatrix n (S m1) =>
       match v' in (vect _ k) return (k = S m1 -> Lmatrix n k) with
-      | vnil => fun h => vnil (vect A n)
-      | vcons m2 x2 v2 =>
+      | vnil _ => fun h => vnil (vect A n)
+      | vcons _ m2 x2 v2 =>
           fun h =>
           vcons (vect A n) m2 (addvect n x1 x2)
             (addmatrix n m2
@@ -217,16 +217,16 @@ Fixpoint prodmat (n m p : nat) (w1 : Lmatrix m n) {struct w1} :
  Lmatrix p m -> Lmatrix p n :=
   fun w2 : Lmatrix p m =>
   match w1 in (vect _ a) return (Lmatrix p a) with
-  | vnil => vnil (vect A p)
-  | vcons n' r1 rs =>
+  | vnil _ => vnil (vect A p)
+  | vcons _ n' r1 rs =>
       vcons (vect A p) n' (prodvectmat m p r1 w2) (prodmat n' m p rs w2)
   end.
  
 Fixpoint oppmatrix (n m : nat) (w : Lmatrix n m) {struct w} : 
  Lmatrix n m :=
   match w as _ in (vect _ w) return (Lmatrix n w) with
-  | vnil => vnil (vect A n)
-  | vcons p v vs => vcons (vect A n) p (oppvect n v) (oppmatrix n p vs)
+  | vnil _ => vnil (vect A n)
+  | vcons _ p v vs => vcons (vect A n) p (oppvect n v) (oppmatrix n p vs)
   end.
 
 Fixpoint mkzero (n m : nat) {struct m} : Lmatrix n m :=
@@ -406,8 +406,8 @@ replace
               (w2 : vect (vect A p0) m0) {struct w1} : 
   vect (vect A p0) n0 :=
     match w1 in (vect _ n1) return (vect (vect A p0) n1) with
-    | vnil => vnil (vect A p0)
-    | vcons n' r1 rs =>
+    | vnil _ => vnil (vect A p0)
+    | vcons _ n' r1 rs =>
         vcons (vect A p0) n'
           (prodvectmatrix m0 p0 r1 w2 p0 (le_O_n p0) (le_n p0))
           (prodmat n' m0 p0 rs w2)

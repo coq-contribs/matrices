@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export carrier.
-Require Export vectors.
+Require Export Matrices.carrier.
+Require Export Matrices.vectors.
 
  
 Module Type TVectors.
@@ -132,12 +132,12 @@ Definition eq_add_S_tr (n m : nat) (H : S n = S m) : n = m := f_equal pred H.
 Fixpoint addvect (n : nat) (v : vect A n) {struct v} :
  vect A n -> vect A n :=
   match v in (vect _ k) return (vect A k -> vect A k) with
-  | vnil => fun v' => vnil A
-  | vcons n1 x1 v1 =>
+  | vnil _ => fun v' => vnil A
+  | vcons _ n1 x1 v1 =>
       fun v' : vect A (S n1) =>
       match v' in (vect _ k) return (k = S n1 -> vect A k) with
-      | vnil => fun h => vnil A
-      | vcons n2 x2 v2 =>
+      | vnil _ => fun h => vnil A
+      | vcons _ n2 x2 v2 =>
           fun h =>
           vcons A n2 (Aplus x1 x2)
             (addvect n2
@@ -149,12 +149,12 @@ Fixpoint addvect (n : nat) (v : vect A n) {struct v} :
 Fixpoint scalprod (n : nat) (v : vect A n) {struct v} : 
  vect A n -> A :=
   match v in (vect _ k) return (vect A k -> A) with
-  | vnil => fun v' => A0
-  | vcons n1 x1 v1 =>
+  | vnil _ => fun v' => A0
+  | vcons _ n1 x1 v1 =>
       fun v' : vect A (S n1) =>
       match v' in (vect _ k) return (k = S n1 -> A) with
-      | vnil => fun h => A0
-      | vcons n2 x2 v2 =>
+      | vnil _ => fun h => A0
+      | vcons _ n2 x2 v2 =>
           fun h =>
           Aplus (Amult x1 x2)
             (scalprod n2
@@ -166,15 +166,15 @@ Fixpoint scalprod (n : nat) (v : vect A n) {struct v} :
 Fixpoint oppvect (n : nat) (v : vect A n) {struct v} : 
  vect A n :=
   match v in (vect _ w) return (vect A w) with
-  | vnil => vnil A
-  | vcons p v vs => vcons A p (Aopp v) (oppvect p vs)
+  | vnil _ => vnil A
+  | vcons _ p v vs => vcons A p (Aopp v) (oppvect p vs)
   end.
  
 Fixpoint multscal (a : A) (n : nat) (v : vect A n) {struct v} : 
  vect A n :=
   match v in (vect _ w) return (vect A w) with
-  | vnil => vnil A
-  | vcons p v vs => vcons A p (Amult a v) (multscal a p vs)
+  | vnil _ => vnil A
+  | vcons _ p v vs => vcons A p (Amult a v) (multscal a p vs)
   end.
 
 Lemma o1 : forall i : nat, 0 <= i -> 0 <= pred i.
