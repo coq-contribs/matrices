@@ -2,7 +2,7 @@ Name:Matrices
 Title:Ring properties for square matrices 
 Author:Nicolas Magaud
 Institution: INRIA Sophia-Antipolis 
-Date: March 2003
+Date: 2003-03
 Description: 
 
 This contribution contains an operational formalization of square matrices. 
