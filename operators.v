@@ -187,7 +187,7 @@ Qed.
  
  
 Definition mkrowI : forall n i : nat, 0 <= i -> i <= n -> vect A n.
-fix 1.
+fix mkrowI 1.
 intros n; case n.
 intros i Hi1 Hi2; exact (vnil A).
 intros n0 i Hi1 Hi2.

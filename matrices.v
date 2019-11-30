@@ -191,7 +191,7 @@ Definition prodvectmatrix :
   forall (n m : nat) (v : vect A n) (w : Lmatrix m n) (c : nat),
   0 <= c -> c <= m -> vect A c.
 intros n m v w.
-fix 1.
+fix prodvectmatrix 1.
 intros c; case c.
 intros H H'; apply vnil.
 intros d Hlt Hle.
@@ -250,7 +250,7 @@ exact last_o4.
 Defined.
  
 Definition I' : forall n m : nat, m <= n -> Lmatrix n m.
-intros n; fix 1.
+intros n; fix I' 1.
 intros m; case m.
 intros; apply (vnil (vect A n)).
 intros m0 Hm0; unfold Lmatrix in |- *; apply (vcons (vect A n)).

@@ -279,7 +279,7 @@ Qed.
  
 Definition last :
   forall (n : nat) (v : vect n) (c : nat), 0 <= c -> c <= n -> vect c.
-intros n v; fix 1.
+intros n v; fix last 1.
 intros c; case c.
 intros; apply vnil.
 intros c' Hc1' Hc2'.
