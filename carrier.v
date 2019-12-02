@@ -31,7 +31,7 @@ End Carrier.
 Module Zc : Carrier.
 
 Definition A := Z.
-Definition Aopp := Zopp.
+Definition Aopp := Z.opp.
 Definition Aplus := Zplus.
 Definition Aminus := Zminus.
 Definition Amult := Zmult.
